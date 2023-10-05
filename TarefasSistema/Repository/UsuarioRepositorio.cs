@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using TarefasSistema.Data;
 using TarefasSistema.Models;
 using TarefasSistema.Repository.Interface;
