@@ -29,17 +29,34 @@ namespace TarefasSistema.Repository
 
             return usuario;
         }
-
-        public Task<bool> Apagar(int id)
+        public async Task<UsuarioModel> Atualizar(UsuarioModel usuario, int id)
         {
-            throw new NotImplementedException();
+            UsuarioModel usuarioPorID = await BuscarById(id);
+            if(usuarioPorID == null)
+            {
+                throw new Exception($"Usuário do id {id} não foi encontrado.");
+            }
+
+            usuarioPorID.Nome = usuario.Nome;
+            usuarioPorID.Email = usuario.Email;
+
+            _dbContext.Usuarios.Update(usuarioPorID);
+            _dbContext.SaveChanges();
+
+            return usuarioPorID;
         }
 
-        public Task<UsuarioModel> Atualizar(UsuarioModel usuario, int id)
+        public async Task<bool> Apagar(int id)
         {
-            throw new NotImplementedException();
+            UsuarioModel usuarioPorID = await BuscarById(id);
+            if (usuarioPorID == null)
+            {
+                throw new Exception($"Usuário do id {id} não foi encontrado.");
+            }
+            _dbContext.Usuarios.Remove(usuarioPorID);
+            _dbContext.SaveChanges();
+            return true;
         }
-
         
     }
 }
