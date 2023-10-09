@@ -24,7 +24,7 @@ namespace TarefasSistema.Repository
         }
         public async Task<UsuarioModel> AdicionarUsuario(UsuarioModel usuario)
         {
-            _dbContext.Usuarios.Add(usuario);
+            await _dbContext.Usuarios.AddAsync(usuario);
             _dbContext.SaveChanges();
 
             return usuario;
